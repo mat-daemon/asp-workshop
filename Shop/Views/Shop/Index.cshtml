@@ -1,0 +1,49 @@
+﻿@model Shop.ViewModels.ShopViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <tbody>
+
+        @foreach (var category in @Model.categories)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Index" asp-route-id="@category.CategoryId">@Html.DisplayFor(modelItem => category.Name)</a>
+                </td>
+
+            </tr>
+        }
+
+
+        @foreach (var article in @Model.articles)
+        {
+            <tr>
+                <td>
+                    @article.Name
+                </td>
+                <td>
+                    @article.Price
+                </td>
+                <td>
+                    <img width="100" height="100" src="~/upload/@article.ImageName" alt="miniature">
+                </td>
+                <td>
+                    @article.Category.Name
+                </td>
+
+                @if (!User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Add" asp-route-id="@article.ArticleId">Add to cart</a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</table>

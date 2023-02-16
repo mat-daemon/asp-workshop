@@ -1,0 +1,70 @@
+﻿@model Shop.ViewModels.OrderViewModel
+
+<h1>Order</h1>
+
+<table class="table">
+    <tbody>
+
+        @foreach (var article in @Model.cartContent.Articles)
+        {
+            <tr>
+                <td>
+                    @article.Item1.Name
+                </td>
+                <td>
+                    @article.Item1.Price
+                </td>
+                <td>
+                    @article.Item1.Category.Name
+                </td>
+                <td>
+                    @article.Item2
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td>Total</td>
+            <td>
+                @Model.cartContent.totalSum
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<form asp-action="Summary">
+
+    <div class="form-group">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Surname" class="control-label"></label>
+            <input asp-for="Surname" class="form-control" />
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div><div class="form-group">
+            <label asp-for="Street" class="control-label"></label>
+            <input asp-for="Street" class="form-control" />
+            <span asp-validation-for="Street" class="text-danger"></span>
+        </div><div class="form-group">
+            <label asp-for="homeNumber" class="control-label"></label>
+            <input asp-for="homeNumber" class="form-control" />
+            <span asp-validation-for="homeNumber" class="text-danger"></span>
+        </div><div class="form-group">
+            <label asp-for="City" class="control-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Payment" class="control-label"></label>
+            <select asp-for="Payment" class="form-control" asp-items="ViewBag.Payment"></select>
+        </div>
+        <input type="submit" value="Submit order" class="btn btn-primary" />
+    </div>
+</form>
